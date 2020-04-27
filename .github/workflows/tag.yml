@@ -17,6 +17,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         WITH_V: true
         DEFAULT_BUMP: patch
+        DRY_RUN: true
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Create Release
@@ -25,8 +26,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: toto$(git describe --abbrev=0 --tags)
-        release_name: Release $(git describe --abbrev=0 --tags)
-        body: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
+        tag_name: ${new_tag}
+        release_name: Release ${new_tag}
+        body: $(git log ${new_tag}..HEAD --oneline | grep "#patch\|#minor\|#major")
         draft: false
         prerelease: false
