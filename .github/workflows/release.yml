@@ -1,8 +1,6 @@
 name: Create Release
 on:
   push:
-    branches:
-      - master
     # Sequence of patterns matched against refs/tags
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
@@ -13,16 +11,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Get log
-        run: ::set-env name=release_body::$(git log v0.4.13..HEAD --oneline | grep "#patch\|#minor\|#major")
+      # - name: Get log
+      #   run: ::set-env name=RELEASE_BODY::$(git log v0.4.13..HEAD --oneline | grep "#patch\|#minor\|#major")
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          RELEASE_BODY: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{ release_body }}
+          body: ${{ RELEASE_BODY }}
           draft: false
           prerelease: false
