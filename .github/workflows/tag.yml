@@ -24,11 +24,9 @@ jobs:
       uses: actions/create-release@latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        CURRENT_TAG: $(git describe --abbrev=0 --tags)
-        RELEASE_BODY: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
       with:
-        tag_name: ${ CURRENT_TAG }
-        release_name: Release ${ CURRENT_TAG }
-        body: ${ RELEASE_BODY }
+        tag_name: $(git describe --abbrev=0 --tags)
+        release_name: Release $(git describe --abbrev=0 --tags)
+        body: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
         draft: false
         prerelease: false
