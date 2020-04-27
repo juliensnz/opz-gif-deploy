@@ -27,8 +27,8 @@ jobs:
         CURRENT_TAG: $(git describe --abbrev=0 --tags)
         RELEASE_BODY: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
       with:
-        tag_name: ${ RELEASE_BODY }
-        release_name: Release ${ RELEASE_BODY }
+        tag_name: ${ CURRENT_TAG }
+        release_name: Release ${ CURRENT_TAG }
         body: ${ RELEASE_BODY }
         draft: false
         prerelease: false
