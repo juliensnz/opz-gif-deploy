@@ -25,7 +25,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: $(git describe --abbrev=0 --tags)
+        tag_name: toto$(git describe --abbrev=0 --tags)
         release_name: Release $(git describe --abbrev=0 --tags)
         body: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
         draft: false
