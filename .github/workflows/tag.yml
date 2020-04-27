@@ -17,22 +17,18 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         WITH_V: true
         DEFAULT_BUMP: patch
-  release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-          CURRENT_TAG: $(git describe --tags `git rev-list --tags --max-count=1`)
-          RELEASE_BODY: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
-        with:
-          tag_name: ${ RELEASE_BODY }
-          release_name: Release ${ RELEASE_BODY }
-          body: ${ RELEASE_BODY }
-          draft: false
-          prerelease: false
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        CURRENT_TAG: $(git describe --tags $(git rev-list --tags --max-count=1))
+        RELEASE_BODY: $(git log ${{ github.ref }}..HEAD --oneline | grep "#patch\|#minor\|#major")
+      with:
+        tag_name: ${ RELEASE_BODY }
+        release_name: Release ${ RELEASE_BODY }
+        body: ${ RELEASE_BODY }
+        draft: false
+        prerelease: false
