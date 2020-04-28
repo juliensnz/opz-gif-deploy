@@ -29,7 +29,7 @@ jobs:
         with:
           file-path: ./package.json
           commit-msg: Update package.json for ${{steps.bump_version.outputs.new_tag}} release
-          github-token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
