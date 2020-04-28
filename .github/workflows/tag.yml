@@ -1,4 +1,4 @@
-name: Bump version and release
+name: Create release
 on:
   push:
     branches:
