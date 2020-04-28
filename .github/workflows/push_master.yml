@@ -56,5 +56,5 @@ jobs:
           publish_dir: ./build
       - run: |
         curl -d "version=${{steps.bump_version.outputs.new_tag}}&title=Release ${{steps.bump_version.outputs.new_tag}}&release_start=$(node ./.github/workflows/date.js)"
-          -H 'Authorization: Basic ${{ secrets.AMPLITUDE_API_KEY }}'
+          -H "Authorization\: Basic ${{ secrets.AMPLITUDE_API_KEY }}"
           -X POST https://amplitude.com/api/2/release
