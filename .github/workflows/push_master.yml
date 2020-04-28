@@ -47,7 +47,7 @@ jobs:
           node-version: 13.13
       - name: Install Packages
         run: npm install
-      -name: test
+      - name: test
         run: echo $REACT_APP_GIPHY_API_KEY
       - name: Build page
         run: export REACT_APP_GIPHY_API_KEY=$REACT_APP_GIPHY_API_KEY && export REACT_APP_ANALYTICS_API_KEY=$REACT_APP_ANALYTICS_API_KEY && npm run build
