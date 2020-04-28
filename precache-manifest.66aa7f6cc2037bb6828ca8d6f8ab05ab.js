@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "49fe5f83513fd821d11be1f8dd9e88bd",
+    "revision": "4c1dad0dcaed46f6331e171d3d09c72f",
     "url": "/opz-gif-deploy/index.html"
   },
   {
-    "revision": "71c472b4001449cc4639",
+    "revision": "fef0dcd402e84cf100b7",
     "url": "/opz-gif-deploy/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "a9f7c56122f24c9926e0",
-    "url": "/opz-gif-deploy/static/js/2.5a4eb54f.chunk.js"
+    "revision": "c4835055e6e558c2e6c6",
+    "url": "/opz-gif-deploy/static/js/2.6ff5318a.chunk.js"
   },
   {
     "revision": "ae595edd83e4d4c693a705cbba5a7a41",
-    "url": "/opz-gif-deploy/static/js/2.5a4eb54f.chunk.js.LICENSE.txt"
+    "url": "/opz-gif-deploy/static/js/2.6ff5318a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "71c472b4001449cc4639",
-    "url": "/opz-gif-deploy/static/js/main.2d99e9ba.chunk.js"
+    "revision": "fef0dcd402e84cf100b7",
+    "url": "/opz-gif-deploy/static/js/main.e706f22e.chunk.js"
   },
   {
     "revision": "1285cb168a96db6f3e4e",
