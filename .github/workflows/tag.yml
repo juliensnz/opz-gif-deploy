@@ -21,7 +21,9 @@ jobs:
           DRY_RUN: true
       - run: echo "::set-output name=release_body::$(git log ${{steps.bump_version.outputs.tag}}..HEAD --oneline | grep '#patch\|#minor\|#major')"
         id: get_release_body
-      - run: TAG_VERSION=${{steps.bump_version.outputs.new_tag}} && npm version ${TAG_VERSION:1}
+      - run: TAG_VERSION=${{steps.bump_version.outputs.new_tag}} && npm --no-git-tag-version version ${TAG_VERSION:1}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       - name: Update resources
         uses: alexesprit/action-update-file@master
         with:
