@@ -38,8 +38,7 @@ jobs:
         with:
           tag_name: ${{steps.bump_version.outputs.new_tag}}
           release_name: Release ${{steps.bump_version.outputs.new_tag}}
-          body: |
-            ${{steps.get_release_body.outputs.release_body}}
+          body: ${{steps.get_release_body.outputs.release_body}}
           draft: false
           prerelease: false
       - name: Use Node.js 13
