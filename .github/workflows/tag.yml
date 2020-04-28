@@ -19,7 +19,7 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
-      - run: echo "::set-output name=release_body::$(git log ${{steps.bump_version.outputs.new_tag}}..HEAD --oneline | grep '#patch\|#minor\|#major')"
+      - run: echo "::set-output name=release_body::$(git log ${{steps.bump_version.outputs.tag}}..HEAD --oneline | grep '#patch\|#minor\|#major')"
         id: get_release_body
       - name: Create Release
         id: create_release
