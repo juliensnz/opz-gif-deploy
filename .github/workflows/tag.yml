@@ -21,14 +21,35 @@ jobs:
           DRY_RUN: true
       - run: echo "::set-output name=release_body::$(git log ${{steps.bump_version.outputs.tag}}..HEAD --oneline | grep '#patch\|#minor\|#major')"
         id: get_release_body
+      - run: npm version ${'${{steps.bump_version.outputs.new_tag}}':1}
+      - name: Update resources
+        uses: alexesprit/action-update-file@master
+        with:
+          file-path: ./package.json
+          commit-msg: Update package.json for ${{steps.bump_version.outputs.new_tag}} release
+          github-token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         with:
           tag_name: ${{steps.bump_version.outputs.new_tag}}
           release_name: Release ${{steps.bump_version.outputs.new_tag}}
-          body: ${{steps.get_release_body.outputs.release_body}}
+          body: |
+            ${{steps.get_release_body.outputs.release_body}}
           draft: false
           prerelease: false
+      - name: Use Node.js 13
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13.13
+      - name: Install Packages
+        run: npm install
+      - name: Build page
+        run: npm run build
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build
