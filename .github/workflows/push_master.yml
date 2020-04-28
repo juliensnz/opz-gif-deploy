@@ -55,4 +55,3 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
       - run: curl -d "version=${{steps.bump_version.outputs.new_tag}}&title=Release ${{steps.bump_version.outputs.new_tag}}" -u API_Key:${{ secrets.AMPLITUDE_API_KEY }} -X POST https://amplitude.com/api/2/release
-        id: get_release_body
